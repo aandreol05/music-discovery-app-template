@@ -27,11 +27,14 @@ describe('TopArtistItem component', () => {
         expect(img).toBeInTheDocument();
         expect(img).toHaveAttribute('src', artist.images[1].url);
 
+        // index should start at 1
+        expect(listItem).toHaveTextContent(/^1\.\s*Test Artist/);
+
         // details assertions
-        expect(listItem).toHaveTextContent(artist.name);
-        expect(listItem).toHaveTextContent(`Genres: ${artist.genres.join(', ')}`);
-        expect(listItem).toHaveTextContent(`Followers: ${artist.followers.total.toLocaleString()}`);
-        expect(listItem).toHaveTextContent(`Popularity: ${artist.popularity}`);
+        expect(listItem.textContent).toContain(artist.name);
+        expect(listItem.textContent).toContain(`Genres: ${artist.genres.join(', ')}`);
+        expect(listItem.textContent).toContain(`Followers: ${artist.followers.total.toLocaleString()}`);
+        expect(listItem.textContent).toContain(`Popularity: ${artist.popularity}`);
 
         // link to artist page
         const link = within(listItem).getByRole('link', { name: /view artist/i });
@@ -59,10 +62,13 @@ describe('TopArtistItem component', () => {
         // should not contain artist image (query by alt)
         expect(within(listItem).queryByAltText(artist.name)).not.toBeInTheDocument();
 
+        // index should start at 2 for index=1
+        expect(listItem).toHaveTextContent(/^2\.\s*No Image Artist/);
+
         // details assertions
-        expect(listItem).toHaveTextContent(artist.name);
-        expect(listItem).toHaveTextContent(`Genres: ${artist.genres.join(', ')}`);
-        expect(listItem).toHaveTextContent(`Followers: ${artist.followers.total.toLocaleString()}`);
+        expect(listItem.textContent).toContain(artist.name);
+        expect(listItem.textContent).toContain(`Genres: ${artist.genres.join(', ')}`);
+        expect(listItem.textContent).toContain(`Followers: ${artist.followers.total.toLocaleString()}`);
 
         // link to artist page
         const link = within(listItem).getByRole('link', { name: /view artist/i });
