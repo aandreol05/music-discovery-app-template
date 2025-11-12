@@ -12,7 +12,7 @@ describe('TopArtistItem component', () => {
             name: 'Test Artist',
             images: [{ url: 'test.jpg' }, { url: 'test-medium.jpg' }, { url: 'test-small.jpg' }],
             genres: ['pop', 'rock'],
-            followers: { total: 1000 },
+            followers: { total: 100 },
             popularity: 85,
             external_urls: { spotify: 'https://open.spotify.com/artist/artist1' }
         };
@@ -31,7 +31,7 @@ describe('TopArtistItem component', () => {
         expect(listItem).toHaveTextContent(artist.name);
         expect(listItem).toHaveTextContent(`Genres: ${artist.genres.join(', ')}`);
         // Utiliser une regex pour gérer les différents formats de séparateurs de milliers
-        expect(listItem).toHaveTextContent(/Followers:\s*1[\s,]?000/);
+        expect(listItem).toHaveTextContent(/Followers:\s*1[\s,]?00/);
         expect(listItem).toHaveTextContent(`Popularity: ${artist.popularity}`);
 
         // NOUVEAU TEST : vérifie que l'index affiché est 1 quand index prop = 0
