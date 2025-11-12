@@ -31,10 +31,10 @@ describe('TopArtistItem component', () => {
         expect(listItem).toHaveTextContent(/^1\.\s*Test Artist/);
 
         // details assertions
-        expect(listItem.textContent).toContain(artist.name);
-        expect(listItem.textContent).toContain(`Genres: ${artist.genres.join(', ')}`);
-        expect(listItem.textContent).toContain(`Followers: ${artist.followers.total.toLocaleString()}`);
-        expect(listItem.textContent).toContain(`Popularity: ${artist.popularity}`);
+        expect(listItem).toHaveTextContent(artist.name);
+        expect(listItem).toHaveTextContent(`Genres: ${artist.genres.join(', ')}`);
+        expect(listItem).toHaveTextContent(/Followers: 1[\s\u202F]000/);
+        expect(listItem).toHaveTextContent(`Popularity: ${artist.popularity}`);
 
         // link to artist page
         const link = within(listItem).getByRole('link', { name: /view artist/i });
@@ -66,9 +66,9 @@ describe('TopArtistItem component', () => {
         expect(listItem).toHaveTextContent(/^2\.\s*No Image Artist/);
 
         // details assertions
-        expect(listItem.textContent).toContain(artist.name);
-        expect(listItem.textContent).toContain(`Genres: ${artist.genres.join(', ')}`);
-        expect(listItem.textContent).toContain(`Followers: ${artist.followers.total.toLocaleString()}`);
+        expect(listItem).toHaveTextContent(artist.name);
+        expect(listItem).toHaveTextContent(`Genres: ${artist.genres.join(', ')}`);
+        expect(listItem).toHaveTextContent(/Followers: 500/);
 
         // link to artist page
         const link = within(listItem).getByRole('link', { name: /view artist/i });
