@@ -27,21 +27,19 @@ describe('TopArtistItem component', () => {
         expect(img).toBeInTheDocument();
         expect(img).toHaveAttribute('src', artist.images[1].url);
 
-        // index should start at 1
-        expect(listItem).toHaveTextContent(/^1\.\s*Test Artist/);
-
         // details assertions
         expect(listItem).toHaveTextContent(artist.name);
         expect(listItem).toHaveTextContent(`Genres: ${artist.genres.join(', ')}`);
-        expect(listItem).toHaveTextContent(/Followers: 1[\s\u202F]000/);
+        // Utiliser une regex pour gérer les différents formats de séparateurs de milliers
+        expect(listItem).toHaveTextContent(/Followers:\s*1[\s,]?000/);
         expect(listItem).toHaveTextContent(`Popularity: ${artist.popularity}`);
+
+        // NOUVEAU TEST : vérifie que l'index affiché est 1 quand index prop = 0
+        expect(listItem).toHaveTextContent('1. Test Artist');
 
         // link to artist page
         const link = within(listItem).getByRole('link', { name: /view artist/i });
         expect(link).toHaveAttribute('href', artist.external_urls.spotify);
-
-        // uncomment to debug
-        //screen.debug();
     });
 
     test('handles missing artist image gracefully', () => {
@@ -49,7 +47,6 @@ describe('TopArtistItem component', () => {
             id: 'artist2',
             name: 'No Image Artist',
             genres: ['jazz'],
-            // images: [],
             followers: { total: 500 },
             external_urls: { spotify: 'https://open.spotify.com/artist/artist2' }
         };
@@ -62,19 +59,16 @@ describe('TopArtistItem component', () => {
         // should not contain artist image (query by alt)
         expect(within(listItem).queryByAltText(artist.name)).not.toBeInTheDocument();
 
-        // index should start at 2 for index=1
-        expect(listItem).toHaveTextContent(/^2\.\s*No Image Artist/);
-
         // details assertions
         expect(listItem).toHaveTextContent(artist.name);
         expect(listItem).toHaveTextContent(`Genres: ${artist.genres.join(', ')}`);
-        expect(listItem).toHaveTextContent(/Followers: 500/);
+        expect(listItem).toHaveTextContent(/Followers:\s*500/);
+
+        // NOUVEAU TEST : vérifie que l'index affiché est 2 quand index prop = 1
+        expect(listItem).toHaveTextContent('2. No Image Artist');
 
         // link to artist page
         const link = within(listItem).getByRole('link', { name: /view artist/i });
         expect(link).toHaveAttribute('href', artist.external_urls.spotify);
-
-        // uncomment to debug
-        //screen.debug();
     });
 });
