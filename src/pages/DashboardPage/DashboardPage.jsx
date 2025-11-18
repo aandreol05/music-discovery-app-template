@@ -20,8 +20,6 @@ export default function DashboardPage() {
   useEffect(() => {
     document.title = buildTitle('Dashboard');
     if (!token) return;
-    setLoadingArtist(true);
-    setLoadingTrack(true);
     fetchUserTopArtists(token, 1, 'short_term')
       .then(res => {
         if (res.error) {
@@ -36,7 +34,7 @@ export default function DashboardPage() {
           setTopArtist(null);
         }
       })
-      .catch(err => setErrorArtist('Network error for artists'))
+      .catch(_ => setErrorArtist('Network error for artists'))
       .finally(() => setLoadingArtist(false));
 
     fetchUserTopTracks(token, 1, 'short_term')
@@ -53,7 +51,7 @@ export default function DashboardPage() {
           setTopTrack(null);
         }
       })
-      .catch(err => setErrorTrack('Network error for tracks'))
+      .catch(_ => setErrorTrack('Network error for tracks'))
       .finally(() => setLoadingTrack(false));
   }, [token, navigate]);
 
