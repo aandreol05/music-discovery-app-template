@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { fetchUserTopArtists, fetchUserTopTracks } from '../../api/spotify-me.js';
 import { useRequireToken } from '../../hooks/useRequireToken.js';
 import SimpleCard from '../../components/SimpleCard/SimpleCard.jsx';
