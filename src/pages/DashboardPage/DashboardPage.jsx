@@ -34,7 +34,7 @@ export default function DashboardPage() {
           setTopArtist(null);
         }
       })
-      .catch(_ => setErrorArtist('Network error for artists'))
+      .catch(() => setErrorArtist('Network error for artists'))
       .finally(() => setLoadingArtist(false));
 
     fetchUserTopTracks(token, 1, 'short_term')
@@ -51,7 +51,7 @@ export default function DashboardPage() {
           setTopTrack(null);
         }
       })
-      .catch(_ => setErrorTrack('Network error for tracks'))
+      .catch(() => setErrorTrack('Network error for tracks'))
       .finally(() => setLoadingTrack(false));
   }, [token, navigate]);
 
@@ -59,7 +59,6 @@ export default function DashboardPage() {
     <section className="dashboard-container page-container" aria-labelledby="dashboard-title">
       <h1 id="dashboard-title" className="page-title dashboard-title">Dashboard</h1>
       <div className="dashboard-subtitle">Your top artist and track</div>
-      {/* Show loading indicators only while loading and not after error or data */}
       {loadingArtist && !errorArtist && !topArtist && (
         <output data-testid="loading-artists-indicator" className="dashboard-loading">Loading artists…</output>
       )}
