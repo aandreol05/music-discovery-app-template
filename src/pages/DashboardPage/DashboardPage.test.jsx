@@ -8,7 +8,7 @@ import * as spotifyApi from '../../api/spotify-me.js';
 import { beforeEach, afterEach, jest } from '@jest/globals';
 import { KEY_ACCESS_TOKEN } from '../../constants/storageKeys.js';
 import { buildTitle } from '../../constants/appMeta.js';
-import DashboardPage from './dashboardPage.jsx';
+import DashboardPage from './DashboardPage.jsx';
 
 // Mock top artist and track data
 const topArtistData = {
