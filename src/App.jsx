@@ -8,7 +8,7 @@ import Layout from './components/Layout/Layout.jsx';
 import LoginPage from './pages/LoginPage/LoginPage.jsx';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage.jsx';
 import AccountPage from './pages/AccountPage/AccountPage.jsx';
-import DashboardPage from './pages/dashboardPage/dashboardPage.jsx';
+import DashboardPage from './pages/DashboardPage/DashboardPage.jsx';
 
 
 const router = createBrowserRouter([
