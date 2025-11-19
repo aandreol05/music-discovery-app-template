@@ -38,7 +38,7 @@ describe('PlayListItem component', () => {
         // link is rendered correctly
         const link = screen.getByTestId(`playlist-link-${playlist.id}`);
         // React Router Link renders href as a full path, so we check it ends with the id
-        expect(link.getAttribute('href')).toContain(`/playlists/${playlist.id}`);
+        expect(link).toHaveAttribute('href', expect.stringContaining(`/playlists/${playlist.id}`));
         expect(link).toHaveTextContent('Details');
     });
 });

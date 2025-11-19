@@ -5,6 +5,7 @@ import { fetchPlaylistById } from '../../api/spotify-playlists.js';
 import TrackItem from '../../components/TrackItem/TrackItem.jsx';
 import { handleTokenError } from '../../utils/handleTokenError.js';
 import './DetailPlaylistPage.css';
+import { buildTitle } from '../../constants/appMeta.js';
 
 export default function DetailPlaylistPage() {
   const { id } = useParams();
@@ -14,8 +15,10 @@ export default function DetailPlaylistPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // Set document title
+  useEffect(() => { document.title = buildTitle('Playlist'); }, []);
+
   useEffect(() => {
-    document.title = 'Playlist | Spotify App';
     if (!token || !id) return;
     fetchPlaylistById(token, id)
       .then(res => {
@@ -35,18 +38,18 @@ export default function DetailPlaylistPage() {
       .finally(() => setLoading(false));
   }, [token, id, navigate]);
 
-  if (loading) return <output role="status" data-testid="loading-indicator">Loading playlist…</output>;
+  if (loading) return <output data-testid="loading-indicator">Loading playlist…</output>;
   if (error) return <div role="alert">{error}</div>;
   // Affiche "No playlist found" seulement si playlist === null et pas d'erreur
   if (playlist === null && !error) return <div>No playlist found.</div>;
 
   return (
-    <section className="playlist-detail-container" aria-labelledby="playlist-title">
-      <h1 id="playlist-title" role="heading" aria-level="1">{playlist?.name}</h1>
+    <section className="playlist-container page-container" aria-labelledby="playlist-title">
+      <h1 id="playlist-title" className="playlist-title page-title">{playlist?.name}</h1>
       {playlist?.images?.[0]?.url && (
         <img src={playlist.images[0].url} alt={`Cover of ${playlist.name}`} style={{ maxWidth: 200, borderRadius: 8 }} />
       )}
-      <h2 role="heading" aria-level="2">{playlist?.description}</h2>
+      <h2 className="playlist-subtitle page-subtitle">{playlist?.description}</h2>
       <button
         className="playlist-play-btn"
         onClick={() => window.open(playlist.external_urls?.spotify, '_blank', 'noopener,noreferrer')}
@@ -59,7 +62,7 @@ export default function DetailPlaylistPage() {
       {playlist?.tracks?.items?.length === 0 ? (
         <div>Aucune piste dans cette playlist.</div>
       ) : (
-        <ol>
+        <ol className="playlist-list">
           {playlist?.tracks?.items?.map((item, i) => (
             <TrackItem key={item.track.id || i} track={item.track} data-testid={`track-item-${item.track.id}`} />
           ))}
