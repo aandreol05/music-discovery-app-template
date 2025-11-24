@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './PlayListItem.css';
 import '../ListItem.css';
 
@@ -8,7 +9,7 @@ import '../ListItem.css';
  */
 export default function PlayListItem({ playlist }) {
   return (
-  <li key={playlist.id} data-testid={`playlist-item-${playlist.id}`} className="list-item playlist-item">
+    <li key={playlist.id} data-testid={`playlist-item-${playlist.id}`} className="list-item playlist-item">
       <img
         src={playlist.images[0]?.url}
         alt="cover"
@@ -21,14 +22,13 @@ export default function PlayListItem({ playlist }) {
         </div>
         <div className="playlist-item-tracks">{playlist.tracks.total} tracks</div>
       </div>
-      <a
-        href={playlist.external_urls.spotify}
-        target="_blank"
-        rel="noopener noreferrer"
+      <Link
+        to={`/playlists/${playlist.id}`}
         className="playlist-link"
+        data-testid={`playlist-link-${playlist.id}`}
       >
-        Open
-      </a>
+        Details
+      </Link>
     </li>
   );
 }
