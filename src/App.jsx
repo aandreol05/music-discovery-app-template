@@ -9,6 +9,8 @@ import LoginPage from './pages/LoginPage/LoginPage.jsx';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage.jsx';
 import AccountPage from './pages/AccountPage/AccountPage.jsx';
 import DetailPlaylistPage from './pages/DetailPlaylistPage/DetailPlaylistPage.jsx';
+import DashboardPage from './pages/DashboardPage/DashboardPage.jsx';
+
 
 const router = createBrowserRouter([
   {
@@ -19,6 +21,7 @@ const router = createBrowserRouter([
       { path: 'login', element: <LoginPage /> },
       { path: 'callback', element: <Callback /> },
       { path: 'account', element: <AccountPage /> },
+      { path: 'dashboard', element: <DashboardPage /> },
       { path: 'top-tracks', element: <TopTracksPage /> },
       { path: 'top-artists', element: <TopArtistsPage /> },
       { path: 'playlists', element: <PlaylistsPage /> },
