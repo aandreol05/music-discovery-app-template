@@ -8,6 +8,7 @@ import Layout from './components/Layout/Layout.jsx';
 import LoginPage from './pages/LoginPage/LoginPage.jsx';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage.jsx';
 import AccountPage from './pages/AccountPage/AccountPage.jsx';
+import DetailPlaylistPage from './pages/DetailPlaylistPage/DetailPlaylistPage.jsx';
 import DashboardPage from './pages/DashboardPage/DashboardPage.jsx';
 
 
@@ -24,6 +25,7 @@ const router = createBrowserRouter([
       { path: 'top-tracks', element: <TopTracksPage /> },
       { path: 'top-artists', element: <TopArtistsPage /> },
       { path: 'playlists', element: <PlaylistsPage /> },
+      { path: 'playlists/:id', element: <DetailPlaylistPage /> },
       { path: '*', element: <NotFoundPage /> }
     ]
   }
